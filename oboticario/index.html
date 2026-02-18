@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro | Projeto</title>
+
+<style>
+:root{
+  --bg:#f6f7f7;
+  --text:#143028;
+  --muted:#5c6b66;
+  --brand:#1b7f57;
+  --brand2:#0f5132;
+  --radius:18px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+body{background:var(--bg);color:var(--text);}
+
+.topbar{
+  padding:15px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:bold;
+}
+.dot{
+  width:12px;height:12px;border-radius:50%;
+  background:linear-gradient(135deg,var(--brand2),var(--brand));
+}
+.nav a{
+  text-decoration:none;
+  padding:10px 15px;
+  border-radius:10px;
+  margin-left:10px;
+  font-weight:bold;
+}
+.nav .btn{
+  background:linear-gradient(135deg,var(--brand2),var(--brand));
+  color:#fff;
+}
+
+.hero img{ width:100%; display:block; }
+
+.section{
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+.left img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:var(--radius);
+}
+
+.card{
+  background:#fff;
+  border-radius:var(--radius);
+  padding:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.field{ margin-bottom:12px; }
+
+label{ font-size:13px; color:var(--muted); }
+
+input,select{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  margin-top:5px;
+}
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.check{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+  font-size:13px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border:none;
+  border-radius:12px;
+  font-weight:bold;
+  background:linear-gradient(135deg,var(--brand2),var(--brand));
+  color:#fff;
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+
+.bottom{
+  max-width:1100px;
+  margin:40px auto;
+  padding:0 20px;
+}
+.bottom img{
+  width:100%;
+  border-radius:var(--radius);
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  font-size:13px;
+  color:#666;
+}
+
+@media(max-width:900px){
+  .section{grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="dot"></div>
+    Sua Marca / Projeto
+  </div>
+</div>
+
+<!-- IMAGEM 1 -->
+<section class="hero">
+  <img src="imagem/imagem1.png" alt="Abertura">
+</section>
+
+<!-- IMAGEM 2 + FORM -->
+<section class="section">
+
+  <div class="left">
+    <img src="imagem/imagem2.png" alt="Imagem lateral">
+  </div>
+
+  <div class="card">
+    <h2>Cadastre-se com segurança</h2>
+
+    <div class="field">
+      <label>Nome completo *</label>
+      <input id="nome" type="text" required>
+    </div>
+
+    <div class="two">
+      <div class="field">
+        <label>CPF *</label>
+        <input id="cpf" type="text" required>
+      </div>
+
+      <div class="field">
+        <label>RG *</label>
+        <input id="rg" type="text" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Data de nascimento *</label>
+      <input id="nasc" type="date" required>
+    </div>
+
+    <div class="field">
+      <label>E-mail *</label>
+      <input id="email" type="email" required>
+    </div>
+
+    <div class="two">
+      <div class="field">
+        <label>Gênero *</label>
+        <select id="genero" required>
+          <option value="">Selecione</option>
+          <option>Feminino</option>
+          <option>Masculino</option>
+          <option>Prefiro não informar</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>WhatsApp *</label>
+        <input id="whats" type="tel" required>
+      </div>
+    </div>
+
+    <div class="check">
+      <input id="aceite" type="checkbox" required>
+      <span>Li e aceito a Política de Privacidade.</span>
+    </div>
+
+    <button id="btnEnviar" type="button">Enviar cadastro</button>
+  </div>
+
+</section>
+
+<!-- IMAGEM 3 -->
+<section class="bottom">
+  <img src="imagem/imagem3.png" alt="Final da página">
+</section>
+
+<footer>
+© 2026 • Todos os direitos reservados
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const btn = document.getElementById("btnEnviar");
+
+  btn.addEventListener("click", async () => {
+
+    try {
+
+      const nome = document.getElementById("nome").value.trim();
+      const cpf = document.getElementById("cpf").value.trim();
+      const rg = document.getElementById("rg").value.trim();
+      const nasc = document.getElementById("nasc").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const genero = document.getElementById("genero").value;
+      const whats = document.getElementById("whats").value.trim();
+      const aceite = document.getElementById("aceite").checked;
+
+      if (!aceite) {
+        alert("Você precisa aceitar a Política.");
+        return;
+      }
+
+      if (!nome || !cpf || !rg || !nasc || !email || !genero || !whats) {
+        alert("Preencha todos os campos.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+
+      const response = await fetch("/api/cadastro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome, cpf, rg, nasc, email, genero, whats })
+      });
+
+      const text = await response.text();
+
+      if (response.ok) {
+        alert("Cadastro enviado com sucesso!");
+      } else {
+        alert("Erro ao enviar: " + text);
+      }
+
+    } catch (error) {
+      alert("Erro de conexão. Veja o console (F12).");
+      console.error(error);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Enviar cadastro";
+    }
+
+  });
+
+});
+</script>
+
+</body>
+</html>
