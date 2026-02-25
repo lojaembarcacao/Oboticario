@@ -35,17 +35,6 @@ body{background:var(--bg);color:var(--text);}
   width:12px;height:12px;border-radius:50%;
   background:linear-gradient(135deg,var(--brand2),var(--brand));
 }
-.nav a{
-  text-decoration:none;
-  padding:10px 15px;
-  border-radius:10px;
-  margin-left:10px;
-  font-weight:bold;
-}
-.nav .btn{
-  background:linear-gradient(135deg,var(--brand2),var(--brand));
-  color:#fff;
-}
 
 .hero img{ width:100%; display:block; }
 
@@ -73,7 +62,6 @@ body{background:var(--bg);color:var(--text);}
 }
 
 .field{ margin-bottom:12px; }
-
 label{ font-size:13px; color:var(--muted); }
 
 input,select{
@@ -146,12 +134,10 @@ footer{
   </div>
 </div>
 
-<!-- IMAGEM 1 -->
 <section class="hero">
   <img src="imagem/imagem1.png" alt="Abertura">
 </section>
 
-<!-- IMAGEM 2 + FORM -->
 <section class="section">
 
   <div class="left">
@@ -163,35 +149,47 @@ footer{
 
     <div class="field">
       <label>Nome completo *</label>
-      <input id="nome" type="text" required>
+      <input id="nome" name="nome" type="text" required
+             autocomplete="name"
+             placeholder="Seu nome completo">
     </div>
 
     <div class="two">
       <div class="field">
         <label>CPF *</label>
-        <input id="cpf" type="text" required>
+        <input id="cpf" name="cpf" type="text" required
+               inputmode="numeric"
+               autocomplete="off"
+               maxlength="14"
+               placeholder="000.000.000-00">
       </div>
 
       <div class="field">
         <label>RG *</label>
-        <input id="rg" type="text" required>
+        <input id="rg" name="rg" type="text" required
+               autocomplete="off"
+               placeholder="Seu RG">
       </div>
     </div>
 
     <div class="field">
       <label>Data de nascimento *</label>
-      <input id="nasc" type="date" required>
+      <input id="nasc" name="nasc" type="date" required
+             autocomplete="bday">
     </div>
 
     <div class="field">
       <label>E-mail *</label>
-      <input id="email" type="email" required>
+      <input id="email" name="email" type="email" required
+             autocomplete="email"
+             inputmode="email"
+             placeholder="seuemail@email.com">
     </div>
 
     <div class="two">
       <div class="field">
         <label>Gênero *</label>
-        <select id="genero" required>
+        <select id="genero" name="genero" required>
           <option value="">Selecione</option>
           <option>Feminino</option>
           <option>Masculino</option>
@@ -201,7 +199,11 @@ footer{
 
       <div class="field">
         <label>WhatsApp *</label>
-        <input id="whats" type="tel" required>
+        <input id="whats" name="whats" type="tel" required
+               autocomplete="tel"
+               inputmode="tel"
+               maxlength="15"
+               placeholder="(00) 00000-0000">
       </div>
     </div>
 
@@ -215,7 +217,6 @@ footer{
 
 </section>
 
-<!-- IMAGEM 3 -->
 <section class="bottom">
   <img src="imagem/imagem3.png" alt="Final da página">
 </section>
@@ -227,50 +228,63 @@ footer{
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
+  const cpfInput = document.getElementById("cpf");
+  const whatsInput = document.getElementById("whats");
   const btn = document.getElementById("btnEnviar");
+
+  // Máscara CPF
+  cpfInput.addEventListener("input", () => {
+    let v = cpfInput.value.replace(/\D/g, "").slice(0,11);
+    v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    v = v.replace(/(\d{3})(\d)/, "$1.$2");
+    v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    cpfInput.value = v;
+  });
+
+  // Máscara WhatsApp
+  whatsInput.addEventListener("input", () => {
+    let v = whatsInput.value.replace(/\D/g, "").slice(0,11);
+    if (v.length > 10) {
+      v = v.replace(/(\d{2})(\d{5})(\d)/, "($1) $2-$3");
+    } else {
+      v = v.replace(/(\d{2})(\d{4})(\d)/, "($1) $2-$3");
+    }
+    whatsInput.value = v;
+  });
 
   btn.addEventListener("click", async () => {
 
+    const nome = document.getElementById("nome").value.trim();
+    const cpf = cpfInput.value.replace(/\D/g,"");
+    const rg = document.getElementById("rg").value.trim();
+    const nasc = document.getElementById("nasc").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const genero = document.getElementById("genero").value;
+    const whats = whatsInput.value.replace(/\D/g,"");
+    const aceite = document.getElementById("aceite").checked;
+
+    if (!aceite) return alert("Você precisa aceitar a Política.");
+    if (!nome || !cpf || !rg || !nasc || !email || !genero || !whats)
+      return alert("Preencha todos os campos.");
+
+    btn.disabled = true;
+    btn.textContent = "Enviando...";
+
     try {
-
-      const nome = document.getElementById("nome").value.trim();
-      const cpf = document.getElementById("cpf").value.trim();
-      const rg = document.getElementById("rg").value.trim();
-      const nasc = document.getElementById("nasc").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const genero = document.getElementById("genero").value;
-      const whats = document.getElementById("whats").value.trim();
-      const aceite = document.getElementById("aceite").checked;
-
-      if (!aceite) {
-        alert("Você precisa aceitar a Política.");
-        return;
-      }
-
-      if (!nome || !cpf || !rg || !nasc || !email || !genero || !whats) {
-        alert("Preencha todos os campos.");
-        return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = "Enviando...";
-
       const response = await fetch("/api/cadastro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nome, cpf, rg, nasc, email, genero, whats })
       });
 
-      const text = await response.text();
-
       if (response.ok) {
         alert("Cadastro enviado com sucesso!");
       } else {
-        alert("Erro ao enviar: " + text);
+        alert("Erro ao enviar.");
       }
 
     } catch (error) {
-      alert("Erro de conexão. Veja o console (F12).");
+      alert("Erro de conexão.");
       console.error(error);
     } finally {
       btn.disabled = false;
