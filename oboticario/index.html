@@ -7,220 +7,132 @@
 
 <style>
 :root{
-  --bg:#f4f6f7;
-  --text:#0f1f1a;
-  --muted:#66746f;
+  --bg:#f6f7f7;
+  --text:#143028;
+  --muted:#5c6b66;
   --brand:#1b7f57;
   --brand2:#0f5132;
   --radius:18px;
-
-  --card:#ffffff;
-  --border:#e6ecea;
-  --shadow: 0 18px 45px rgba(12, 32, 24, .10);
-  --shadow2: 0 8px 18px rgba(12, 32, 24, .08);
-  --focus: rgba(27,127,87,.20);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  line-height:1.3;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+body{background:var(--bg);color:var(--text);}
 
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:rgba(244,246,247,.85);
-  backdrop-filter: blur(10px);
-  border-bottom:1px solid rgba(0,0,0,.06);
-}
-.topbar-inner{
-  max-width:1100px;
-  margin:0 auto;
-  padding:14px 20px;
+  padding:15px 25px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd;
 }
 .brand{
   display:flex;
   align-items:center;
-  gap:10px;
-  font-weight:800;
-  letter-spacing:.2px;
+  gap:8px;
+  font-weight:bold;
 }
 .dot{
   width:12px;height:12px;border-radius:50%;
   background:linear-gradient(135deg,var(--brand2),var(--brand));
-  box-shadow:0 0 0 6px rgba(27,127,87,.10);
+}
+.nav a{
+  text-decoration:none;
+  padding:10px 15px;
+  border-radius:10px;
+  margin-left:10px;
+  font-weight:bold;
+}
+.nav .btn{
+  background:linear-gradient(135deg,var(--brand2),var(--brand));
+  color:#fff;
 }
 
 .hero img{ width:100%; display:block; }
 
 .section{
   max-width:1100px;
-  margin:34px auto 0;
+  margin:40px auto;
   padding:0 20px;
   display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:26px;
-  align-items:stretch;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
 }
 
 .left img{
   width:100%;
   height:100%;
-  min-height:520px;
   object-fit:cover;
   border-radius:var(--radius);
-  box-shadow: var(--shadow2);
-  border:1px solid rgba(0,0,0,.04);
 }
 
 .card{
-  background:var(--card);
-  border-radius:calc(var(--radius) + 4px);
-  padding:26px;
-  box-shadow: var(--shadow);
-  border:1px solid rgba(0,0,0,.05);
+  background:#fff;
+  border-radius:var(--radius);
+  padding:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
-.card-header{
-  margin-bottom:18px;
-}
-.card-header h2{
-  font-size:22px;
-  letter-spacing:-0.3px;
-}
-.card-header p{
-  margin-top:6px;
-  color:var(--muted);
-  font-size:13.5px;
-}
+.field{ margin-bottom:12px; }
 
-.divider{
-  height:1px;
-  background:linear-gradient(90deg, transparent, rgba(0,0,0,.08), transparent);
-  margin:16px 0 18px;
-}
-
-.field{ margin-bottom:14px; }
-
-label{
-  display:block;
-  font-size:13px;
-  font-weight:650;
-  color:var(--muted);
-}
+label{ font-size:13px; color:var(--muted); }
 
 input,select{
   width:100%;
-  padding:12px 12px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:#fbfcfc;
-  margin-top:7px;
-  font-size:14px;
-  transition: box-shadow .2s, border-color .2s, background .2s, transform .06s;
-}
-
-input::placeholder{ color:#a4b0ac; }
-
-input:focus, select:focus{
-  outline:none;
-  border-color: rgba(27,127,87,.55);
-  box-shadow: 0 0 0 4px var(--focus);
-  background:#fff;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  margin-top:5px;
 }
 
 .two{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:10px;
 }
 
 .check{
   display:flex;
-  align-items:flex-start;
-  gap:12px;
+  gap:10px;
   margin-top:10px;
-  padding:12px;
-  border:1px solid var(--border);
-  background:#fbfcfc;
-  border-radius:14px;
-}
-
-.check input{
-  width:20px;
-  height:20px;
-  margin-top:2px;
-  accent-color: var(--brand);
-  cursor:pointer;
-}
-
-.check span{
   font-size:13px;
-  color:var(--muted);
-  line-height:1.35;
-}
-
-.check span b{
-  color:var(--text);
-  font-weight:700;
 }
 
 button{
   width:100%;
-  padding:13px 14px;
-  margin-top:14px;
+  padding:12px;
+  margin-top:15px;
   border:none;
-  border-radius:14px;
-  font-weight:800;
-  letter-spacing:.2px;
+  border-radius:12px;
+  font-weight:bold;
   background:linear-gradient(135deg,var(--brand2),var(--brand));
   color:#fff;
   cursor:pointer;
-  box-shadow: 0 12px 28px rgba(15,81,50,.22);
-  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
 }
-
-button:hover{
-  filter: brightness(1.03);
-  box-shadow: 0 14px 34px rgba(15,81,50,.26);
-}
-button:active{ transform: translateY(1px); }
 
 button:disabled{
-  opacity:0.65;
+  opacity:0.6;
   cursor:not-allowed;
-  box-shadow:none;
 }
 
 .bottom{
   max-width:1100px;
-  margin:26px auto 40px;
+  margin:40px auto;
   padding:0 20px;
 }
 .bottom img{
   width:100%;
   border-radius:var(--radius);
-  box-shadow: var(--shadow2);
-  border:1px solid rgba(0,0,0,.04);
 }
 
 footer{
   text-align:center;
-  padding:18px 20px 28px;
+  padding:20px;
   font-size:13px;
-  color:#6b7571;
+  color:#666;
 }
 
 @media(max-width:900px){
-  .section{grid-template-columns:1fr; margin-top:22px;}
-  .left img{ min-height:240px; }
+  .section{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -228,18 +140,18 @@ footer{
 <body>
 
 <div class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">
-      <div class="dot"></div>
-      Sua Marca / Projeto
-    </div>
+  <div class="brand">
+    <div class="dot"></div>
+    Sua Marca / Projeto
   </div>
 </div>
 
+<!-- IMAGEM 1 -->
 <section class="hero">
   <img src="imagem/imagem1.png" alt="Abertura">
 </section>
 
+<!-- IMAGEM 2 + FORM -->
 <section class="section">
 
   <div class="left">
@@ -247,77 +159,63 @@ footer{
   </div>
 
   <div class="card">
-    <div class="card-header">
-      <h2>Cadastre-se com segurança</h2>
-      <p>Seus dados são usados apenas para concluir o cadastro e contato. <b>Não compartilhamos informações.</b></p>
-    </div>
-
-    <div class="divider"></div>
+    <h2>Cadastre-se com segurança</h2>
 
     <div class="field">
-      <label for="nome">Nome completo *</label>
-      <input id="nome" name="nome" type="text" required
-             autocomplete="name"
-             placeholder="Seu nome completo">
+      <label>Nome completo *</label>
+      <input id="nome" type="text" required>
     </div>
 
     <div class="two">
       <div class="field">
-        <label for="cpf">CPF *</label>
-        <input id="cpf" name="cpf" type="text" required
-               inputmode="numeric" autocomplete="off"
-               maxlength="14" placeholder="000.000.000-00">
+        <label>CPF *</label>
+        <input id="cpf" type="text" required>
       </div>
 
       <div class="field">
-        <label for="rg">RG *</label>
-        <input id="rg" name="rg" type="text" required
-               autocomplete="off" maxlength="20"
-               placeholder="Seu RG">
+        <label>RG *</label>
+        <input id="rg" type="text" required>
       </div>
     </div>
 
     <div class="field">
-      <label for="nasc">Data de nascimento *</label>
-      <input id="nasc" name="nasc" type="date" required autocomplete="bday">
+      <label>Data de nascimento *</label>
+      <input id="nasc" type="date" required>
     </div>
 
     <div class="field">
-      <label for="email">E-mail *</label>
-      <input id="email" name="email" type="email" required
-             autocomplete="email" inputmode="email"
-             placeholder="seuemail@email.com">
+      <label>E-mail *</label>
+      <input id="email" type="email" required>
     </div>
 
     <div class="two">
       <div class="field">
-        <label for="genero">Gênero *</label>
-        <select id="genero" name="genero" required>
+        <label>Gênero *</label>
+        <select id="genero" required>
           <option value="">Selecione</option>
-          <option value="Feminino">Feminino</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Prefiro não informar">Prefiro não informar</option>
+          <option>Feminino</option>
+          <option>Masculino</option>
+          <option>Prefiro não informar</option>
         </select>
       </div>
 
       <div class="field">
-        <label for="whats">WhatsApp *</label>
-        <input id="whats" name="whats" type="tel" required
-               autocomplete="tel" inputmode="tel"
-               maxlength="15" placeholder="(00) 00000-0000">
+        <label>WhatsApp *</label>
+        <input id="whats" type="tel" required>
       </div>
     </div>
 
-    <label class="check" for="aceite" style="cursor:pointer;">
-      <input id="aceite" name="aceite" type="checkbox" required>
-      <span>Li e aceito a <b>Política de Privacidade</b>.</span>
-    </label>
+    <div class="check">
+      <input id="aceite" type="checkbox" required>
+      <span>Li e aceito a Política de Privacidade.</span>
+    </div>
 
     <button id="btnEnviar" type="button">Enviar cadastro</button>
   </div>
 
 </section>
 
+<!-- IMAGEM 3 -->
 <section class="bottom">
   <img src="imagem/imagem3.png" alt="Final da página">
 </section>
@@ -329,45 +227,34 @@ footer{
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  const cpfInput = document.getElementById("cpf");
-  const whatsInput = document.getElementById("whats");
   const btn = document.getElementById("btnEnviar");
 
-  // Máscara CPF
-  cpfInput.addEventListener("input", () => {
-    let v = cpfInput.value.replace(/\D/g, "").slice(0,11);
-    v = v.replace(/(\d{3})(\d)/, "$1.$2");
-    v = v.replace(/(\d{3})(\d)/, "$1.$2");
-    v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-    cpfInput.value = v;
-  });
-
-  // Máscara WhatsApp (10 ou 11 dígitos)
-  whatsInput.addEventListener("input", () => {
-    let v = whatsInput.value.replace(/\D/g, "").slice(0,11);
-    if (v.length > 10) v = v.replace(/(\d{2})(\d{5})(\d)/, "($1) $2-$3");
-    else v = v.replace(/(\d{2})(\d{4})(\d)/, "($1) $2-$3");
-    whatsInput.value = v;
-  });
-
   btn.addEventListener("click", async () => {
-    const nome = document.getElementById("nome").value.trim();
-    const cpf = cpfInput.value.replace(/\D/g,"");
-    const rg = document.getElementById("rg").value.trim();
-    const nasc = document.getElementById("nasc").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const genero = document.getElementById("genero").value;
-    const whats = whatsInput.value.replace(/\D/g,"");
-    const aceite = document.getElementById("aceite").checked;
-
-    if (!aceite) return alert("Você precisa aceitar a Política.");
-    if (!nome || cpf.length !== 11 || !rg || !nasc || !email || !genero || (whats.length < 10))
-      return alert("Preencha todos os campos corretamente.");
-
-    btn.disabled = true;
-    btn.textContent = "Enviando...";
 
     try {
+
+      const nome = document.getElementById("nome").value.trim();
+      const cpf = document.getElementById("cpf").value.trim();
+      const rg = document.getElementById("rg").value.trim();
+      const nasc = document.getElementById("nasc").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const genero = document.getElementById("genero").value;
+      const whats = document.getElementById("whats").value.trim();
+      const aceite = document.getElementById("aceite").checked;
+
+      if (!aceite) {
+        alert("Você precisa aceitar a Política.");
+        return;
+      }
+
+      if (!nome || !cpf || !rg || !nasc || !email || !genero || !whats) {
+        alert("Preencha todos os campos.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+
       const response = await fetch("/api/cadastro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -376,8 +263,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const text = await response.text();
 
-      if (response.ok) alert("Cadastro enviado com sucesso!");
-      else alert("Erro ao enviar: " + text);
+      if (response.ok) {
+        alert("Cadastro enviado com sucesso!");
+      } else {
+        alert("Erro ao enviar: " + text);
+      }
 
     } catch (error) {
       alert("Erro de conexão. Veja o console (F12).");
@@ -386,6 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.disabled = false;
       btn.textContent = "Enviar cadastro";
     }
+
   });
 
 });
