@@ -15,39 +15,30 @@
   --radius:18px;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
-body{background:var(--bg);color:var(--text);}
-
-.topbar{
-  padding:15px 25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #ddd;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-weight:bold;
-}
-.dot{
-  width:12px;height:12px;border-radius:50%;
-  background:linear-gradient(135deg,var(--brand2),var(--brand));
-}
-.nav a{
-  text-decoration:none;
-  padding:10px 15px;
-  border-radius:10px;
-  margin-left:10px;
-  font-weight:bold;
-}
-.nav .btn{
-  background:linear-gradient(135deg,var(--brand2),var(--brand));
-  color:#fff;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-.hero img{ width:100%; display:block; }
+body{
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* HERO TOPO CORTADO */
+.hero{
+  width:100%;
+  height:260px;
+  overflow:hidden;
+}
+
+.hero img{
+  width:100%;
+  display:block;
+  margin-top:-95px;
+}
 
 .section{
   max-width:1100px;
@@ -72,9 +63,14 @@ body{background:var(--bg);color:var(--text);}
   box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
-.field{ margin-bottom:12px; }
+.field{
+  margin-bottom:12px;
+}
 
-label{ font-size:13px; color:var(--muted); }
+label{
+  font-size:13px;
+  color:var(--muted);
+}
 
 input,select{
   width:100%;
@@ -119,6 +115,7 @@ button:disabled{
   margin:40px auto;
   padding:0 20px;
 }
+
 .bottom img{
   width:100%;
   border-radius:var(--radius);
@@ -132,21 +129,24 @@ footer{
 }
 
 @media(max-width:900px){
-  .section{grid-template-columns:1fr;}
+  .section{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    height:180px;
+  }
+
+  .hero img{
+    margin-top:-70px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="topbar">
-  <div class="brand">
-    <div class="dot"></div>
-    Sua Marca / Projeto
-  </div>
-</div>
-
-<!-- IMAGEM 1 -->
+<!-- IMAGEM 1 CORTADA -->
 <section class="hero">
   <img src="imagem/imagem1.png" alt="Abertura">
 </section>
@@ -159,7 +159,7 @@ footer{
   </div>
 
   <div class="card">
-    <h2>Garanta seu cadastro agora</h2>
+    <h2>Cadastre-se com segurança</h2>
 
     <div class="field">
       <label>Nome completo *</label>
@@ -226,13 +226,10 @@ footer{
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-
   const btn = document.getElementById("btnEnviar");
 
   btn.addEventListener("click", async () => {
-
     try {
-
       const nome = document.getElementById("nome").value.trim();
       const cpf = document.getElementById("cpf").value.trim();
       const rg = document.getElementById("rg").value.trim();
@@ -276,9 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.disabled = false;
       btn.textContent = "Enviar cadastro";
     }
-
   });
-
 });
 </script>
 
